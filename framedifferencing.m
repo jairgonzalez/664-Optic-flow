@@ -1,9 +1,7 @@
-filename = '31secondzebrafish.mp4';
+filename = 'ZebraFishSHORTCROPPED.mp4';
 mov = VideoReader(filename);
 numFrames = mov.NumberOfFrames;
 numFramesWritten = 0;
-finalvid = VideoWriter('zFishOutput.avi');
-open(finalvid);
 
 frames = read(mov);
 frameInfo = size(frames);
@@ -14,15 +12,14 @@ disp(pixels);
 
 for l = 1:(500)
     temp = frames(:,:,:,l);
-    temp = im2gray(temp);
+    temp = double(im2gray(temp));
     temp2 = frames(:,:,:,l + 1);
-    temp2 = im2gray(temp2);
+    temp2 = double(im2gray(temp2));
     temp3 = frames(:,:,:,l); % rgb frame
     for w = 1:width
         for h = 1:height
             if(abs(temp2(w, h) - temp(w, h)) > 30) 
-                %temp(w, h) = 0; 
-                temp3(w, h) = 255; 255;
+                temp3(w, h,:) = [255, 0, 0];
 
             else 
                 %temp(w, h) = 255; 
@@ -31,10 +28,6 @@ for l = 1:(500)
         end 
     end
     %imshow(temp);
-    %writeVideo(finalvid, temp);
 
     imshow(temp3);
-    writeVideo(finalvid, temp3);
 end 
-
-close(finalvid);
