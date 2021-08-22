@@ -3,7 +3,7 @@
 
 %% Load images
 clear all;
-
+// test
 I1 = imread('frames_grey/0004.png');
 I2 = imread('frames_grey/0005.png');
 figure();
